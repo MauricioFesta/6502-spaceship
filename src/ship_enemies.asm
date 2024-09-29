@@ -2,6 +2,8 @@
 .import main
 .export ship_enemies
 .export move_enemies
+.export move_enemies_right
+.export move_enemies_left
 .import reset_handler
 
 
@@ -18,6 +20,66 @@ draw_enemies: ;start draw ship enemies
     CPX $0303
     BNE draw_enemies ;end draw ship enemies
     
+.endproc
+
+.proc move_enemies_right
+
+    LDA $0304
+    CMP #$00 
+    BEQ nothing
+
+    LDX #$00
+    LDY #$00
+move_enemies_loop_right: 
+    INY
+    INX
+    CPX #$03
+    BNE move_enemies_loop_right
+    LDA $0214,Y
+    STA $0330
+    
+    TAX
+    INX
+    INX
+    TXA
+    STA $0214,Y
+
+
+end:
+    ; LDX #$00
+    ; INY
+    ; CPY $0303
+    ; BNE move_enemies_loop_right
+
+.endproc
+
+.proc move_enemies_left
+
+;     LDA $0304
+;     CMP #$00 
+;     BEQ nothing
+
+;     LDX #$00
+;     LDY #$00
+; move_enemies_loop_left: 
+;     INY
+;     INX
+;     CPX #$01
+;     BNE move_enemies_loop_left
+;     LDA $0214,Y
+;     TAX
+;     INX
+;     INX
+;     TXA
+;     STA $0214,Y
+;     LDX #$00
+;     INY
+;     INY
+;     INY
+;     STY $0360
+;     CPY $0303
+;     BNE move_enemies_loop_left
+
 .endproc
 
 
@@ -53,6 +115,11 @@ move_enemies_loop:
     LDX #$00
     CPY $0303
     BNE move_enemies_loop ;end move ship enemies
+
+    LDX #$00
+    LDY #$00
+
+
     TXA
     PHA
     TYA
@@ -67,6 +134,7 @@ move_enemies_loop:
 
     RTS
 
+.endproc
 
 nothing:
   RTS
@@ -173,8 +241,6 @@ compare_x:
     BEQ died
     RTS
 
-.endproc
-
 died:
 
    
@@ -240,8 +306,8 @@ store:
  
  
 sprites_enemies:
-    .byte $01, $0c, $00, $18
-    .byte $F, $0c, $00, $32
+    .byte $20, $0c, $00, $18
+    .byte $F, $0c, $00, $31
     .byte $30, $0c, $00, $42
     .byte $60, $0c, $00, $52
     .byte $90, $0c, $00, $68

@@ -124,10 +124,10 @@
 
 .proc background_scroll
 
-    LDA $0304 ;if win don't do nothing
-    TAX
-    CPX #$00
-    BEQ nothing ;end if win
+  LDA $0304 ;if win don't do nothing
+  TAX
+  CPX #$00
+  BEQ nothing ;end if win
 
 	LDA #$00 ;start scroll
 	STA PPUSCROLL 
@@ -166,35 +166,35 @@ draw_level:
 	STA PPUADDR
 	LDA #$cd
 	STA PPUADDR
-    LDX #$0f
+  LDX #$0f
 	STX PPUDATA
 
 	LDA #$20
 	STA PPUADDR
 	LDA #$ce
 	STA PPUADDR
-    LDX #$08
+	LDX #$08
 	STX PPUDATA
 
 	LDA #$20
 	STA PPUADDR
 	LDA #$cf
 	STA PPUADDR
-    LDX #$19
+	LDX #$19
 	STX PPUDATA 
 
 	LDA #$20
 	STA PPUADDR
 	LDA #$d0
 	STA PPUADDR
-    LDX #$08
+	LDX #$08
 	STX PPUDATA
 
 	LDA #$20
 	STA PPUADDR
 	LDA #$d1
 	STA PPUADDR
-    LDX #$0f
+	LDX #$0f
 	STX PPUDATA
 
 	LDA #$20
@@ -203,7 +203,7 @@ draw_level:
 	STA PPUADDR
 	LDA $0306
 	TAX
-    ;LDX #$1f
+	;LDX #$1f
 	STX PPUDATA
 
 	; finally, attribute table

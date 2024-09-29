@@ -17,6 +17,8 @@
 .import background_tiles
 .import ship_enemies
 .import move_enemies
+.import move_enemies_right
+.import move_enemies_left
 .import background_scroll
 
 
@@ -31,6 +33,8 @@
 	STA $2005
 
   JSR background_scroll
+  JSR move_enemies_right
+  JSR move_enemies_left
   JSR move_enemies
   
 LatchController:
